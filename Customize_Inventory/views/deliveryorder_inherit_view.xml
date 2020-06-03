@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="delivery_order_form_inherit_related" model="ir.ui.view">
+        <field name="name">delivery.order.form.inherit_related</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <!--<xpath expr="/form/sheet/notebook/page/field[@name='pack_operation_product_ids']/tree/field[@name='product_id']" position="after">
+                <field name="x_serialnumber_related"/>
+            </xpath>-->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="x_test" string="File Number"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
