@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account.invoice_form_inherit2" model="ir.ui.view">
+        <field name="name">custom.invoice.line.form_inherit</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='name']" position="before">
+                <field name="x_serialnumber"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
