@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<!--    _________________________________________________________________-->
+    <record id="purchase_order_form_inherit_custom" model="ir.ui.view">
+        <field name="name">purchase.order_form_inherit1</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']" position="before">
+                <field name="x_filenumber"/>
+            </xpath>
+        </field>
+    </record>
+<!--    _________________________________________________________________-->
+    <record id="purchase_order_view_inherit_custom" model="ir.ui.view">
+        <field name="name">purchase.order.view.inherit_custom</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='name']" position="after">-->
+            <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='name']" position="after">
+                <field name="x_serialnumber"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_ref']" position="after">
+                <field name="x_origin_ref"/>
+            </xpath>
+        </field>
+    </record>
+<!--    __________________________________________________________________-->
+
+<!--To Inherit search view --> <!--Inherit quotations search view expand for -->
+    <record id="view_purchase_quotation_inherit_search" model="ir.ui.view">
+        <field name="name">purchase.order.search.expand</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+          <!-- This field will show up on the quick search -->
+                <field name="order_line" string="Serial Number" filter_domain="[('order_line.x_serialnumber', 'ilike', self)]"/>
+                <field name="x_filenumber"/> <!--string="File Number" filter_domain="=['x_filenumber', 'ilike',self)]"-->
+                <field name="x_origin_ref"/>
+                <field name="partner_ref"/>
+            </xpath>
+      </field>
+    </record>
+<!--    ____________________________________________________________________________-->
+
+<!--inheriting Search views in sales order-->
+<!--    <record id="view_sale_Order_inherit_search" model="ir.ui.view">-->
+<!--        <field name="name">sale.order.search.expand</field>-->
+<!--        <field name="model">sale.order</field>-->
+<!--        <field name="inherit_id" ref="sale.view_sales_order_filter"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//search" position="inside">-->
+<!--          &lt;!&ndash; This field will show up on the quick search &ndash;&gt;-->
+<!--                <field name="order_line" string="Serial Number" filter_domain="[('order_line.x_serialnumber', 'ilike', self)]"/>-->
+<!--                <field name="x_filenumber"/> &lt;!&ndash;string="File Number" filter_domain="=['x_filenumber', 'ilike',self)]"&ndash;&gt;-->
+<!--            </xpath>-->
+<!--      </field>-->
+<!--    </record>-->
+
+</odoo>
+
+<!-- -->
