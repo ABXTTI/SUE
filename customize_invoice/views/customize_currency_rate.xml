@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="currency_customize_form_inherit" model="ir.ui.view">
+        <field name="name">currency_customize_form_inherit</field>
+        <field name="model">res.currency.rate</field>
+        <field name="inherit_id" ref="base.view_currency_rate_form"/>
+        <field name="arch" type="xml">
+            <!--<xpath expr="/form/sheet/notebook/page/field[@name='pack_operation_product_ids']/tree/field[@name='product_id']" position="after">
+                <field name="x_serialnumber_related"/>
+            </xpath>-->
+            <xpath expr="//field[@name='rate']" position="after">
+                <field name="x_rate" string="Currency Value"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

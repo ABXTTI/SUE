@@ -4,12 +4,18 @@ from odoo import models, fields, api
 
 
 class AccountInvoiceLine(models.Model):
-    @api.model
-    def get_serial_number(self):
-        for rec in self:
-            res = rec.env['sale.order'].search([('name', '=', rec.origin)])
-            rec.so_reference = res
-
-    so_reference = fields.Many2one('sale.order', compute='get_serial_number')  # adding reference of sale order
     _inherit = 'account.invoice.line'
-    x_serialnumber = fields.Text(string="Serial Number", related='so_reference.order_line.x_serialnumber')
+
+    x_serialnumber = fields.Text(string="Serial Number")
+
+
+class CurrencyRate(models.Model):
+    _inherit = 'res.currency.rate'
+    rate = fields.Float(digits=(12, 6), compute='calrate', readonly=False)
+    x_rate = fields.Float(digits=(12, 6), default=1.0, help='The rate of the currency to the currency of rate 1')
+
+    @api.multi
+    def calrate(self):
+        for rec in self:
+            rec.rate = 1 / rec.x_rate
+            return rec.rate

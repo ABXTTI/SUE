@@ -14,7 +14,8 @@
     'data': [
 
         'views/file_and_serial_number.xml',
-        'views/serial_number.xml'
+        'views/serial_number.xml',
+        'views/customize_currency_rate.xml',
     ],
     'installable': True,
     'application': True,
