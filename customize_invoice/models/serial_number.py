@@ -12,13 +12,12 @@ class AccountInvoiceLine(models.Model):
 class CurrencyRate(models.Model):
     _inherit = 'res.currency.rate'
    
-    
-    
+
     @api.depends('x_rate')
-    def calcrate(self):
+    def calrate(self):
     print ('api depends')
     for rec in self:
        rec.rate = 1 / rec.x_rate
 
-    rate = fields.Float(digits=(12, 12), default=1.0, help='The rate of the currency to the currency of rate 1')
+    rate = fields.Float(digits=(12, 12), default=1.0, compute='calrate', help='The rate of the currency to the currency of rate 1')
     x_rate = fields.Float(digits=(12, 12), default=1.0, help='The rate of the currency to the currency of rate 1')
