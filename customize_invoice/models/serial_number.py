@@ -15,9 +15,8 @@ class CurrencyRate(models.Model):
 
     @api.depends('x_rate')
     def calrate(self):
-    print ('api depends')
-    for rec in self:
-       rec.rate = 1 / rec.x_rate
+        for rec in self:
+            rec.rate = 1 / rec.x_rate
 
     rate = fields.Float(digits=(12, 12), default=1.0, compute='calrate', help='The rate of the currency to the currency of rate 1')
     x_rate = fields.Float(digits=(12, 12), default=1.0, help='The rate of the currency to the currency of rate 1')
